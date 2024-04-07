@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { todosIPT, updateTodos } from "../models/todolist.schema";
-import { create, curTodos, delTodos, getTodos, searchTodos, todosAll, updTd, usTs } from "../service/todolist.service";
+import { create, curTodos, delTodos, getTodos, searchTodos, todosAll, updTd } from "../service/todolist.service";
 
     
 
@@ -73,12 +73,10 @@ import { create, curTodos, delTodos, getTodos, searchTodos, todosAll, updTd, usT
 
     export async function currentTodos(req: FastifyRequest, rly: FastifyReply){
         const todos = await curTodos()
-        const tsa = await usTs()
-        const not = tsa.find(u=> req.user.uuid !== u.authorId)
         
-        if(not) {
+        const userTodos = todos.find(u => req.user.uuid === u.authorId)
+        if(!userTodos) {
             return rly.code(404).send({msg: "You don't make a todolist"})
         }
-        const userTodos = todos.find(u => req.user.uuid === u.authorId)
         return rly.code(201).send(userTodos)
     }
