@@ -76,7 +76,7 @@ import { create, curTodos, delTodos, getTodos, searchTodos, todosAll, updTd } fr
         
         const userTodos = todos.find(u => req.user.uuid === u.authorId)
         if(!userTodos) {
-            return rly.code(404).send({msg: "You don't make a todolist"})
+            return rly.code(404).send({msg: "You don't make a todolist"}) 
         }
         return rly.code(201).send(userTodos)
     }
