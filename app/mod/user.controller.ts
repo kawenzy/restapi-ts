@@ -78,7 +78,7 @@ export async function loginHANDLER(req: FastifyRequest<{
 export async function logout(req: FastifyRequest, rly: FastifyReply){
     const userID = req.user.uuid;
     await storeToken(userID, null)
-    return rly.send({ msg: 'Successfully logged out' });
+    return rly.code(201).send({ msg: 'Successfully logged out' });
 }
 
 export async function currentUser(req: FastifyRequest, rly: FastifyReply) {
