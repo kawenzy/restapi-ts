@@ -71,6 +71,7 @@ import { create, curTodos, delTodos, getTodos, searchTodos, todosAll, updTd } fr
         return rly.code(200).send(updsTd)
     }
 
+  
     export async function currentTodos(req: FastifyRequest, rly: FastifyReply){
         const todos = await curTodos()
         
